@@ -1,0 +1,12 @@
+printAll?
+printTopByVolume? 3
+pause?
+printTopByPercentChange? 3
+pause?
+printTopByPercentChangeAbsolute? 3
+pause?
+printTopByMomentum? 3
+pause?
+x 300s2
+printTopByVolume? 3
+pause?

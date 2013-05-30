@@ -1,0 +1,21 @@
+add? CPQ 2000s32.25
+add? DELL 3000s55.50
+add? GTW 1500s56.50
+add? HWP 5000s156
+add? IBM 2500s123.125
+add? IOM 1000s3.375
+add? GTW 2000s56.75
+IOM 200s2
+CPQ 300s30
+IBM 150s124
+HWP 100s160
+quoteThese? DELL CPQ HWP
+pause?
+printTopByVolume? 6
+printTopByPercentUp? 6
+printTopByPercentDown? 6
+printTopByPercentChange? 6
+printTopByMomentum? 6
+DELL 400s55.75
+printTopByVolume? 6
+printAll?

@@ -1,0 +1,27 @@
+add? y 2000s32.56
+add? x 300s1.2
+add? z 150s3.0
+add? u 500s10
+add? k 250s20
+add? l 400s12
+add? u 400s12
+quoteThese? x u z
+pause?
+x 200s2
+y 300s30
+z 150s3.1
+l 100s12
+printTopByVolume? 3
+pause?
+printTopByPercentUp? 3
+pause?
+printTopByPercentChange? 3
+pause?
+printTopByPercentDown? 3
+pause?
+printTopByMomentum? 3
+pause?
+x 300s2
+printTopByVolume? 3
+pause?
+printAll?

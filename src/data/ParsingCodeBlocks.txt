@@ -1,0 +1,216 @@
+/** File ParsingCodeBlocks.txt, by KWR for CSE250 Fall 2009 (from Spring 2000)
+    TO BE CANNIBALIZED AND ADAPTED.  Blocks provided AS-IS, NO WARRANTY.
+    (In fact, though they come basically verbatim from my 2000 C++ answer-key
+    client, the client *doesn't compile* on "castor" anymore, and I had to
+    fix some things with "getline" just to make it compile on timberlake!
+    Since your home systems may vary even more, this disclaimer is necessary.
+    Also, I edited some of this manually, so not warranted against typos...)
+
+    Specific Adaptations---you are using different names for these components:
+
+    Cardbox --> ChainedHash
+    Sifter  --> Heap
+
+    These were mandated "Facade Pattern" classes in 2000, much the same way
+    as STL <set>, <multiset>, <map>, and <multimap> are all facades for the
+    same RedBlackTree data structure, as covered in Chapter 9 of the K-W text.
+    We decided not to mandate this pattern this year---note that your Heap
+    class will already be kind-of working as a facade for the STL make_heap
+    algorithm (unless you truly roll-your-own, which is allowed as an option).
+
+    Note that some of the command strings are for debugging help---they
+    are not specified as part of the required project output, and are
+    omitted from many of the sample data files.  Also note---nothing here is
+    specifically due 11/23---this is for 12/4, but may help you debug earlier.
+ */
+
+#include  -----------you determine what you need.
+
+
+//--------------------------Command Strings----------------------------------
+//Data lines beginning with these tokens are taken as commands not data.
+//Extra arguments expected in command-file commented at right after "+".
+
+const string ADD_TOKEN = "add?";                     //+data for stock to add
+const string TOP_VOLUME_TOKEN = "printTopByVolume?"; //+int k
+const string TOP_PERCENT_CHANGE_TOKEN =              //absolute change
+   "printTopByPercentChange?";                       //+int k
+const string TOP_PERCENT_UP_TOKEN = "printTopByPercentUp?";     //+int k
+const string TOP_PERCENT_DOWN_TOKEN = "printTopByPercentDown?"; //+int k
+const string TOP_MOMENTUM_TOKEN = "printTopByMomentum?";        //+int k
+const string TOP_TREND_TRADES_TOKEN = "printTopByTrendTrades?";  //+int k
+//extra credit
+//const string TOP_TREND_SHARES_TOKEN = "printTopByTrendShares?";  //+int k
+
+/** Print all stocks, sorted by ticker symbol
+ */
+const string PRINT_ALL_TOKEN = "printAll?";          //no extra argument
+
+/** Pause run (& print out to screen) to set watch for timing next ops.
+    Will be required on final timing runs.
+ */
+const string PAUSE_TOKEN = "pause?";
+
+/** Print out a message just to help see where in the data file you are.
+ */
+const string TYPEOUT_TOKEN = "typeout?";
+
+
+
+
+
+//-------------Optional command strings may help you debug--------------
+
+/** Print out a few specified stocks, for debug help to see if they 
+    updated correctly.  Not required in the final runs---"printAll?" will
+    take care of that.
+ */
+const string QUOTE_THESE_TOKEN = "quoteThese?";      //+list-of-stocks
+
+/** Print out data structure underlying masters, for debugging */
+const string PRINT_DS_TOKEN = "printDS?";
+
+/** Version of "typeout" which you could turn off with a Boolean flag,
+    analogous to if you had a Boolean flag to skip all "cerr << ___"
+    debugging statements in other code, and to how C++ has a global
+    option to turn off all "assert(...)" checks (which we didn't cover).
+ */
+const string WHISPER_TOKEN = "whisper?";
+
+// End of required and suggested tokens---you're free to add others...
+
+
+
+//------------------------------------------------------------------------
+/** PART OF SAMPLE CLIENT---for you to *adapt*.  Helps especially
+    to see generally how to process the data files.  This will also
+    simplify the later timing experiments.
+ */
+
+int main(int argc, char** argv) {
+   ...
+
+   //Use command-line arguments to get data-file name, much as before
+   //but without the extra "n" parameter, since now we will always
+   //read the whole data file.  Once you've read in a fileName:
+
+   ...
+
+   ifstream IN(fileName.c_str(), ios::in); //NB: this syntax can vary a little
+
+   //ofstream OUT...      //to save results in a named output file
+   //ostream OUT = cout;  //print results to screen
+    
+   string result = ""; //save output so it only prints when asked, e.g. 
+                       //when you have a "pause?" line.
+   int k;  //number of top stocks to be fetched, read on each line.
+   
+   while (getline(IN, line)) {
+      line = trim(line);   //forgives whitespace before command token
+
+      //*You* can take a "startsWith(...)" fn to help parse the string data.
+      //*Ditto* atoi, itoa---adapt from "StringExtra.h" as-desired.
+
+      if (startsWith(line,ADD_TOKEN)) {
+         string stockData = trim(line.substr(ADD_TOKEN.length()));
+         int i = stockData.find(' ');
+         string stockName = stockData.substr(0, i);
+         //Etc.:---you might want to parse the inserts & trades in other ways
+
+         ...
+   
+      } else if (startsWith(line,QUOTE_THESE_TOKEN)) {
+         //optional---mainly as a debugging help
+
+      } else if ( startsWith(line, TOP_VOLUME_TOKEN)
+            || startsWith(line, TOP_PERCENT_CHANGE_TOKEN)
+            || startsWith(line, TOP_PERCENT_UP_TOKEN)
+            || startsWith(line, TOP_PERCENT_DOWN_TOKEN)  
+            || startsWith(line, TOP_MOMENTUM_TOKEN)     
+            || startsWith(line, TOP_TREND_TRADES_TOKEN) ) {
+         //extract k first---we assume at least one space precedes it.
+         int i = line.find(' '); //== whitespace after command token
+
+         //see code in "StringExtra.h"---note "trim" trims whitespaces only
+         k = atoi(trim(line.substr(i+1)));
+
+         //now get requested "Top k" list:
+         if (startsWith(line, TOP_PERCENT_CHANGE_TOKEN)) {
+
+            [...your corresponding heaping call(s) here...]
+
+            result += [whatever string output you got, or wish to save]
+
+         } else if (startsWith(line, TOP_PERCENT_UP_TOKEN)) {
+            
+            [...likewise...]
+            
+         } else if (startsWith(line, TOP_VOLUME_TOKEN)) {
+            ...
+         } else if ...[put in blocks for the other tokens, including
+                       extra-credit if you so choose]
+         ...
+         } else {
+         } ///no-op, impossible case; just here to make adding cases easier
+
+      } else if (startsWith(line, PRINT_ALL_TOKEN)) {
+         
+         [Code to iterate, sort, and print in ticker-symbol sorted order.]
+         [In Spring 2000 we had to work around a Sun CC compiler bug by adding
+         interaction, e.g. cout << "Enter y to go on..."; getline(cin,...);
+         Many of you do this on your home systems already in order to stop
+         a window from closing before you see the output.  Our grading
+         scripts require no-interaction, as with CSE250 all last year.]
+
+       } else if (startsWith(line, PAUSE_TOKEN)) {
+
+
+         [For the moment, this CAN be interactive---which may help you debug.
+         For the final 12/4 submission you must later we will ask you
+         to remove interaction lines here as well.]
+
+
+      // REST deals with the debugging tokens, i.e. OPTIONAL, recommended...
+
+      } else if (startsWith(line, PRINT_DS_TOKEN)) {
+         ...
+         ... [you can call your hash table's own str() method---maybe the
+              one from your Valli will work without change!  This might help
+              more for debugging than just printing items a-la printAll?]
+
+      } else if (startsWith(line, TYPEOUT_TOKEN)) {
+         ...[print the rest of the line after the token]...
+
+      } else if (startsWith(line, WHISPER_TOKEN)) {
+         ...[print if a certain bool field is switched on]...
+
+      } else if (line == "") {
+         //can ignore, or maybe output a note about reading a blank line
+
+
+      } else {   //!! Line is a stock-transaction line, so update stock info
+   
+         int i = line.find(' '); ///assume whitespace after ticker symbol
+         string stockSymbol = line.substr(0, i);
+
+
+         ...[Etc.: hash it, process the trade, update fields as-needed.
+         Reminder---you need not do any heap fix-ups immediately---wait
+         until the client hits a "printTopStocksBy... k" request to reheapify.
+         Figuratively, the /less/ you need to do after a trade, the better!]
+
+   
+      } //end of "if(startsWith(...))..."
+        //Note: the while-loop test itself reads a line as a side-effect.
+
+   }  //end of outer while loop.  POST: EOF reached, so we're done.
+
+
+   [...you might want to add some more statements here too...]
+
+   [...output result string...] 
+   IN.close();
+
+   return (0);
+}  //end of main.
+   

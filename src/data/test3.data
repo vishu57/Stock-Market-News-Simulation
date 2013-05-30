@@ -1,0 +1,121 @@
+add? TACX 5485000s7.5
+add? AAON 6227000s20.25
+add? No_Such_Ticker 0s0.0
+add? ABCB 7270000s9.8438
+add? ABCC -1410065407s0.18
+add? ABCR 18356000s10.5625
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? ACEC 8883000s7.0
+add? ACIT -1410065407s1.75
+add? ACRG 10671000s1.5625
+add? ACSEF 2811000s5.5
+add? ACTM 12932000s36.75
+add? ANET 10078000s9.8125
+add? IATV -1410065407s15.5
+add? ADAM 4826000s10.25
+add? ADCT 271002000s50.625
+add? ADEX 13356000s18.5
+add? No_Such_Ticker 0s0.0
+add? ADMT -1410065407s0.26
+add? AEPI 7344000s32.0625
+add? AERN -1410065407s1.0625
+add? AESCW 717000000s127.0
+add? AFCX -1410065407s42.6875
+add? AFPC -1410065407s0.8125
+add? No_Such_Ticker 0s0.0
+add? AGBG -1410065407s0.5
+add? AHLS 17385000s9.375
+add? AMFC 1124000s13.4375
+add? AMBI 30494000s3.8438
+add? No_Such_Ticker 0s0.0
+add? DIT 2732000s6.0625
+add? AMED -1410065407s2.5
+add? AMLJ 6381000s3.375
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? APAT 8824000s22.0
+add? APAC 47506000s7.5
+add? No_Such_Ticker 0s0.0
+add? ARIS 5097000s5.25
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? ASAA 3288000s3.25
+add? ASBP 1598000s8.6094
+add? ASDG -1410065407s0.375
+add? ASTSF 79331000s27.5
+add? No_Such_Ticker 0s0.0
+add? ASIS 6639000s3.875
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? ASVI 9663000s13.125
+add? No_Such_Ticker 0s0.0
+add? ATCS -1410065407s11.6875
+add? ATCSL -1410065407s1.8125
+add? ATEC 7327000s2.75
+add? ATECW -1410065407s0.4375
+add? No_Such_Ticker 0s0.0
+add? ATLI 14604000s50.375
+add? ATSI 17843000s9.875
+add? AVTM 11456000s2.75
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? ASHE -1410065407s-1.0
+add? No_Such_Ticker 0s0.0
+add? ASTM 16930000s3.4688
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? ABDR -1410065407s181.0
+add? ABIX 1762000s1.5
+add? ABAX 13976000s6.875
+add? ABERF 45778000s5.4375
+add? AANB 2086000s7.8125
+add? ABBK 3297000s9.5
+add? ABMD 8707000s33.5
+add? ABTEE 11757000s3.125
+add? ABRI 2936000s3.6563
+add? AXAS -1410065407s1.75
+add? ACRI 10311000s19.125
+add? ACLE -1410065407s0.75
+add? No_Such_Ticker 0s0.0
+add? ACLY -1410065407s1.3125
+add? ACLR -1410065407s0.65
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? AABC 1234000s5.6875
+add? No_Such_Ticker 0s0.0
+add? No_Such_Ticker 0s0.0
+add? ASIC -1410065407s0.14
+add? ASICW -1410065407s0.0010
+add? ASICU -1410065407s0.01
+add? AKLM 54580000s2.75
+add? ACMM -1410065407s1.9688
+add? No_Such_Ticker 0s0.0
+add? ACMI 5492000s1.125
+add? No_Such_Ticker 0s0.0
+add? AACE 10062000s15.0
+add? ACET 6186000s10.75
+add? ACMTA 2979000s8.0
+add? CPQ 2000s32.25
+add? DELL 3000s55.50
+add? GTW 1500s56.50
+add? HWP 5000s156
+add? IBM 2500s123.125
+add? IOM 1000s3.375
+add? GTW 2000s56.75
+IOM 200s2
+CPQ 300s30
+IBM 150s124
+HWP 100s160
+quoteThese? DELL CPQ HWP
+pause?
+printTopByVolume? 6
+printTopByPercentUp? 6
+printTopByPercentDown? 6
+printTopByPercentChange? 6
+printTopByMomentum? 6
+DELL 400s55.75
+printTopByVolume? 6
+printAll?
